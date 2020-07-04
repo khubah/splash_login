@@ -1,9 +1,18 @@
 import 'package:flutter/material.dart';
 import './home.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
+  @override
+  _LoginPageState createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passController = TextEditingController();
+
+  bool _validateEmail = false;
+  bool _validatePassword = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -13,10 +22,11 @@ class LoginPage extends StatelessWidget {
           children: <Widget>[
             Container(
               margin: EdgeInsets.all(20),
-              child: TextField(
+              child: TextFormField(
                 controller: emailController,
                 decoration: InputDecoration(
                   labelText: "email address",
+                  errorText: _validateEmail ? 'Value Can\'t Be Empty' : null,
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10),
                   ),
@@ -27,10 +37,11 @@ class LoginPage extends StatelessWidget {
               margin: EdgeInsets.symmetric(
                 horizontal: 20,
               ),
-              child: TextField(
+              child: TextFormField(
                 controller: passController,
                 decoration: InputDecoration(
                   labelText: "password",
+                  errorText: _validatePassword ? 'Value Can\'t Be Empty' : null,
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10),
                   ),
@@ -41,11 +52,25 @@ class LoginPage extends StatelessWidget {
             ),
             SizedBox(height: 20),
             RaisedButton(
-              onPressed: () {
+              onPressed: () async {
+                setState(() {
+                  emailController.text.isEmpty
+                      ? _validateEmail = true
+                      : _validateEmail = false;
+                  passController.text.isEmpty
+                      ? _validatePassword = true
+                      : _validatePassword = false;
+                });
+                if (_validateEmail || _validatePassword){
+                  return;
+                }
                 Navigator.of(context).pushReplacement(
                   new MaterialPageRoute(
                     settings: const RouteSettings(name: '/home'),
-                    builder: (context) => new Home(email: emailController.text, password: passController.text,),
+                    builder: (context) => new Home(
+                      email: emailController.text,
+                      password: passController.text,
+                    ),
                   ),
                 );
               },
