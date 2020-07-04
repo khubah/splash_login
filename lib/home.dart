@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 
-class Dashboard extends StatelessWidget {
+class Home extends StatelessWidget {
   final String email;
   final String password;
 
-  Dashboard({Key key, this.email, this.password}) : super(key : key);
+  Home({Key key, this.email, this.password}) : super(key : key);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Dashboard"),
+        title: Text("Home"),
       ),
       body: Container(
         margin: EdgeInsets.all(20),

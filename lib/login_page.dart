@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:splash_login/dashboard.dart';
+import './home.dart';
 
 class LoginPage extends StatelessWidget {
   final TextEditingController emailController = TextEditingController();
@@ -44,8 +44,8 @@ class LoginPage extends StatelessWidget {
               onPressed: () {
                 Navigator.of(context).pushReplacement(
                   new MaterialPageRoute(
-                    settings: const RouteSettings(name: '/dasboard'),
-                    builder: (context) => new Dashboard(email: emailController.text, password: passController.text,),
+                    settings: const RouteSettings(name: '/home'),
+                    builder: (context) => new Home(email: emailController.text, password: passController.text,),
                   ),
                 );
               },
