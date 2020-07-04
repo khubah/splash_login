@@ -10,6 +10,13 @@ class _LoginPageState extends State<LoginPage> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passController = TextEditingController();
 
+  
+  bool _regexEmail (){
+    Pattern _pattern= r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+";
+    bool _check = RegExp(_pattern).hasMatch(emailController.text);
+    return _check;
+  }
+
   bool _validateEmail = false;
   bool _validatePassword = false;
 
@@ -26,7 +33,7 @@ class _LoginPageState extends State<LoginPage> {
                 controller: emailController,
                 decoration: InputDecoration(
                   labelText: "email address",
-                  errorText: _validateEmail ? "email is required! can\'t empty" : null,
+                  errorText: _validateEmail ? "Input correct email please!" : null,
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10),
                   ),
@@ -54,7 +61,7 @@ class _LoginPageState extends State<LoginPage> {
             RaisedButton(
               onPressed: () async {
                 setState(() {
-                  emailController.text.isEmpty
+                  (_regexEmail() == false)
                       ? _validateEmail = true
                       : _validateEmail = false;
                   passController.text.isEmpty
