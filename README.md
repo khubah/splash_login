@@ -1,6 +1,9 @@
 # splash_login
 
-A new Flutter project.
+A new Flutter project. This project create Splash Screen, Login Page and Home/Dashboard Page. 
+1. The splash screen showing flutter logo when the app is starting up and only showed once time.
+2. Login page has 2 input (email and password) and one button login to send the data to Home page.
+3. the home page contain the data from login page also has logout button. To back to login page only can use logout button
 
 ## Getting Started
 
