@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Home extends StatelessWidget {
   final String email;
   final String password;
+  final SharedPreferences sp;
 
-  Home({Key key, this.email, this.password}) : super(key : key);
+  Home({Key key, this.email, this.password, this.sp}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,7 +43,10 @@ class Home extends StatelessWidget {
               height: 30,
             ),
             RaisedButton(
-              onPressed: (){Navigator.pushReplacementNamed(context, '/login');},
+              onPressed: () {
+                sp.setBool("login", true);
+                Navigator.pushReplacementNamed(context, '/login');
+              },
               child: Container(
                 child: Text("Logout"),
               ),
